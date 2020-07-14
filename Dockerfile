@@ -19,7 +19,9 @@ RUN true \
 
 COPY sockd.conf /etc/
 
-HEALTHCHECK --interval=60s --timeout=10s --start-period=30s CMD curl -L 'https://ipinfo.io'
+# docker build fails when using --start-period=30s
+# HEALTHCHECK --interval=60s --timeout=10s --start-period=30s CMD curl -L 'https://ipinfo.io'
+HEALTHCHECK --interval=60s --timeout=10s CMD curl -L 'https://ipinfo.io'
 
 ENTRYPOINT [ \
     "/bin/bash", "-c", \
